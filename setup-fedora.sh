@@ -50,28 +50,33 @@ function setup-zsh() {
     git clone https://github.com/zsh-users/zsh-autosuggestions \
         ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
     # simlink zsh dotfiles
+    [[ ! -d $HOME/.config/shell ]] || mkdir -p $HOME/.config/shell
+    ln -sf $PWD/config/shell $HOME/.config/shell
+    [[ ! -f $HOME/.zshrc ]] || ln -sf $PWD/config/zshrc $HOME/.zshrc 
 }
 
 function setup-i3() {
     dnf install -y i3-gaps rofi polybar picom maim fontawesome-fonts starship playerctl xclip feh arandr tilix
     git clone https://github.com/zbaylin/rofi-wifi-menu.git
-    # simlink i3, polybar, starship files
     [[ ! -d $HOME/.config/i3 ]] || mkdir -p $HOME/.config/i3
     ln -sf $PWD/config/i3 $HOME/.config/i3
     [[ ! -d $HOME/.config/polybar ]] || mkdir -p $HOME/.config/polybar
     ln -sf $PWD/config/polybar $HOME/.config/polybar
-    
+    ln -sf $PWD/config/starship.toml $HOME/.config/starship.toml
 }
 
 function setup-vim() {
     dnf install -y vim
-    # simlink vim packages
+    [[ ! -f $HOME/.vim ]] || ln -sf $PWD/config/vim $HOME/.vim 
+    [[ ! -f $HOME/.vimrc ]] || ln -sf $PWD/config/vimrc $HOME/.vimrc 
 }
 
 function setup-vscodium() {
     rpmkeys --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
     printf "[gitlab.com_paulcarroty_vscodium_repo]\nname=download.vscodium.com\nbaseurl=https://download.vscodium.com/rpms/\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg\nmetadata_expire=1h" | sudo tee -a /etc/yum.repos.d/vscodium.repo
     dnf install codium
+    ln -sf $PWD/config/vscode/settings.json $HOME/.config/VSCodium/User/settings.json
+    ln -sf $PWD/config/vscode/keybindings.json $HOME/.config/VSCodium/User/keybindings.json
 }
 
 function setup-brave() {
@@ -87,10 +92,3 @@ function
 function setup-fedora() {
 
 }
-
-chsh $(which zsh)
-
-
-# add bitwarden
-# generate/ ssh keys
-# 
