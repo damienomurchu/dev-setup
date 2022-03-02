@@ -1,0 +1,4 @@
+[module/info-eyestrain]
+type = custom/script
+exec = ~/.config/polybar/scripts/info-eyestrain.sh
+interval = 60

@@ -1,0 +1,9 @@
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = <label-volume>
+label-volume =  %percentage%%
+label-volume-foreground = ${root.foreground}
+
+label-muted =  %percentage%%
+label-muted-foreground = #666

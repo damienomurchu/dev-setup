@@ -1,0 +1,226 @@
+#!/bin/bash
+
+function aliases-base() {
+  alias .z="source ~/.zshrc" #reload zshrc config
+  alias mkdir="mkdir -pv"
+  alias mv='mv -i'
+  alias cp='cp -i'
+  alias ln='ln -i'
+  # Parenting changing perms on / #
+  alias chown='chown --preserve-root'
+  alias chmod='chmod --preserve-root'
+  alias chgrp='chgrp --preserve-root'
+}
+
+function aliases-system() {
+  # switch to bluetooth sound output
+  alias bt='pacmd list-sinks | grep "bluez_sink" -B 1 | grep index | cut -d ":" -f 2 | cut -d " " -f 2 | xargs pactl set-default-sink'
+
+  # forward x over ssh
+  alias ssh-forwardx='ssh -X -C -c aes128-ctr -m hmac-sha1'
+
+  # ports/ processes
+  alias ps="ps auxf" #all processes
+
+  #grep processes 'psg chrome'
+  alias psg="ps aux | grep -v grep | grep -i -e VSZ -e" 
+
+  alias ports='netstat -tulanp'
+
+  # machine usage
+  alias psmem='ps auxf | sort -nr -k 4'
+  alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+  alias pscpu='ps auxf | sort -nr -k 3'
+  alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
+  alias cpuinfo='lscpu'
+
+  # service aliases
+  alias start="sudo systemctl start"
+  alias stop="sudo systemctl stop"
+  alias restart="sudo systemctl restart"
+  alias enable="sudo systemctl enable"
+  alias disable="sudo systemctl disable"
+
+  # power
+  alias reboot='sudo /sbin/reboot'
+  alias poweroff='sudo /sbin/poweroff'
+  alias halt='sudo /sbin/halt'
+  alias shutdown='sudo /sbin/shutdown'
+
+  alias du="ncdu" #ncurses du
+  
+}
+
+function aliases-apps-general() {
+  # appsalias g="git"
+  #alias code="codium"
+  alias t="tmux"
+  alias tf="terraform"
+  alias r="ranger"
+  alias t="tracli"
+  alias v="vim"
+  alias vi="vim"
+  alias kc="kubectl"
+  alias mk="minikube"
+  alias k="taskell"
+  alias t1="tree -CL 1"
+  alias t2="tree -CL 2"
+  alias t3="tree -CL 3"
+  alias t4="tree -CL 4"
+  alias rss="snownews"
+
+  # tmux
+  alias t="tmux"
+  alias ta="t a -t"
+  alias tls="t ls"
+  alias tn="t new -t"
+
+  # cli apps
+  alias myip="curl http://ipecho.net/plain; echo"
+  alias weather='curl http://wttr.in'
+}
+
+function aliases-functions() {
+  alias j="journal-edit"
+  alias ja="journal-entry"
+  alias js="journal-search"
+  alias je="journal-edit"
+  alias s="secret-edit"
+  alias sa="secret-entry"
+  alias ss="secret-search"
+  alias se="secret-edit"
+  alias a="find-alias"
+  alias kp="grep-kubernetes-projects"
+}
+
+function aliases-git() {
+  # add 
+  alias ga="git add"
+  alias gaa="git add ."
+  alias gap="git add -p"
+
+  # alias gc="git commit"
+  alias gca="git commit --amend"
+  alias gcm="conventional-commit"
+
+  alias gcp="git cherry-pick"
+
+  alias co="git checkout"
+  alias gco="git checkout"
+  alias gcb="git checkout -b"
+
+  alias gcl="git clone"
+
+  alias gi="git init"
+
+  alias gl="tig"
+
+  alias gmg="git merge --no-ff"
+
+  alias gpl="git pull"
+  alias gp="git push"
+
+  alias grs="git reset --soft"
+  alias grh="git reset --hard"
+
+  alias gr="git remote" #aliased to go run
+  alias gra="git remote add"
+  alias grm="git remote rm"
+  alias grv="git remote -v"
+
+  alias gst="git status -sb"
+
+  alias gss="git-stash-save"
+  alias gsl="git stash list"
+
+  alias gt="git tag"
+
+  alias grb="git rebase"
+  alias gri="git rebase -i"
+
+  alias gg="git grep"
+  alias gd="git diff" #aliased to godoc
+
+  alias gbs="git bisect"
+  alias gb="git branch"
+
+}
+
+function aliases-dev() {
+  alias acm="git add . && conventional-commit"
+  alias aca="git add . && git commit --amend --no-edit"
+  
+  alias npmlinks="\ls -F node_modules | sed -n 's/@$//p' | xargs npm ls -g --depth 0"
+
+  # doctoc alias for md docs
+  alias toc="doctoc . --title '**Table of Contents**'"
+}
+
+function aliases-python() {
+  alias venv="python3 -m venv .venv"
+  alias venv-activate="source .venv/bin/activate"
+}
+
+function aliases-vpn() {
+  # vpn
+  alias vpn-fb='nmcli con up id "Farnborough (FAB)" --ask'
+  alias vpn-fb-down='nmcli con down id "Farnborough (FAB)"'
+  alias vpn-sp='nmcli con up id "São Paulo (GRU2)" --ask'
+  alias vpn-sp-down='nmcli con down id "São Paulo (GRU2)"'
+}
+
+function aliases-utilities() {
+  alias hg="history | grep"
+  alias untar="tar -zxvf"
+}
+
+function aliases-minishift() {
+  # minishift aliases
+  alias ms="minishift"
+  alias mup="minishift start --memory="10GB" --disk-size="69GB" --cpus=6 --vm-driver=virtualbox"
+  alias mdn="minishift stop"
+  alias mst="minishift status"
+  alias mssh="minishift ssh"
+  alias mpl="minishift profile list"
+  alias msp="minishift set profile"
+}
+
+function aliases-containers() {
+  # docker & k8s aliases
+  alias dk="docker"
+  alias kc="kubectl"
+  alias mk="minikube"
+  alias oi="openshift-install"
+  alias ocp4-config="openshift-install create install-config --dir=$OCP4_CONFIG"
+  alias ocp4-new="openshift-install create cluster --dir=$OCP4_CONFIG"
+  alias ocp4-kill="openshift-install destroy cluster --dir=$OCP4_CONFIG"
+  alias ocup="oc cluster up --base-dir '/home/damienmurphy/.oc/profiles/default/'"
+  alias ocdn="oc cluster down"
+  alias ocst="oc cluster status"
+}
+
+function aliases-vagrant() {
+  # Vagrant aliases
+  alias vup="vagrant up"
+  alias vst="vagrant status"
+  alias vrl="vagrant reload"
+  alias vdn="vagrant halt"
+  alias vpr="vagrant provision"
+}
+
+function setup-aliases() {
+  aliases-base
+  aliases-system
+  aliases-apps-general
+  aliases-functions
+  aliases-dev
+  aliases-python
+  aliases-git
+  aliases-vpn
+  aliases-utilities
+  aliases-minishift
+  aliases-containers
+  aliases-vagrant
+}
+
+setup-aliases

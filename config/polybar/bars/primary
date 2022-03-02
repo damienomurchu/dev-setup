@@ -1,0 +1,71 @@
+;import modules
+include-file = /home/dm/.config/polybar/modules/battery
+include-file = /home/dm/.config/polybar/modules/bluetooth
+include-file = /home/dm/.config/polybar/modules/cpu
+include-file = /home/dm/.config/polybar/modules/date
+include-file = /home/dm/.config/polybar/modules/i3-mode
+include-file = /home/dm/.config/polybar/modules/info-eyestrain
+include-file = /home/dm/.config/polybar/modules/filesystem
+include-file = /home/dm/.config/polybar/modules/k8s-context
+include-file = /home/dm/.config/polybar/modules/keyboard-layout
+include-file = /home/dm/.config/polybar/modules/memory
+include-file = /home/dm/.config/polybar/modules/network-ethernet
+include-file = /home/dm/.config/polybar/modules/network-wireless
+include-file = /home/dm/.config/polybar/modules/pulseaudio
+include-file = /home/dm/.config/polybar/modules/vpn-networkmanager
+include-file = /home/dm/.config/polybar/modules/vpn-status-nord
+include-file = /home/dm/.config/polybar/modules/workspaces
+include-file = /home/dm/.config/polybar/modules/xkeyboard
+include-file = /home/dm/.config/polybar/modules/xwindow
+
+[bar/primary]
+;monitor = ${env:MONITOR:HDMI-1}
+enable-ipc = true
+
+#width = 100%:-18
+#height = 1.75%
+#offset-x = 9
+#offset-y = 8
+#radius = 5.0
+width = 100%
+radius = 0.0
+fixed-center = true
+#border-size = 10
+bottom = false 
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 0
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+;padding at start and end of bar
+padding-left = 1
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = fixed:pixelsize=11;2
+font-1 = unifont:fontformat=truetype:size=11:antialias=false;2
+font-2 = siji:pixelsize=11;2
+font-3 = FontAwesome:style=Regular:size=10;2
+
+tray-maxsize = 10
+
+;modules-left = workspaces
+;modules-right = filesystem cpu memory pulseaudio pulseaudio-microphone bluetooth network-ethernet network-wireless vpn-networkmanager battery
+;modules-center = date 
+
+modules-left = workspaces i3-mode
+modules-center = date 
+modules-right = keyboard-layout memory pulseaudio bluetooth network-ethernet network-wireless battery
+
+tray-position = none
+tray-padding = 2
+
+cursor-click = pointer
+cursor-scroll = ns-resize

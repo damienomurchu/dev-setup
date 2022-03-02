@@ -1,0 +1,4 @@
+[module/vpn-networkmanager]
+type = custom/script
+exec = ~/.config/polybar/scripts/vpn-networkmanager-status.sh
+interval = 5

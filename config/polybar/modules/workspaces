@@ -1,0 +1,36 @@
+[module/workspaces]
+type = internal/xworkspaces
+
+pin-workspaces = true
+enable-click = true
+enable-scroll = true
+
+;icon-1 = 1;One
+;icon-2 = 2;Two
+;icon-3 = 3;Three
+;icon-4 = 4;Four
+;icon-5 = 5;Five
+;icon-6 = 6;Six
+;icon-7 = 7;Seven
+;icon-8 = 8;Eight
+;icon-9 = 9;Nine
+
+
+
+label-active = %name%
+label-occupied = %name%
+label-urgent = %name%
+label-empty = %name%
+
+format = <label-state>
+
+label-monitor = %name%
+label-active-foreground = #00b0ef
+label-occupied-foreground = #444
+label-urgent-foreground = #e53935
+label-empty-foreground = #f7f7f7
+
+label-active-padding = 1
+label-urgent-padding = 1
+label-occupied-padding = 1
+label-empty-padding = 1

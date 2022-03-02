@@ -1,0 +1,10 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Damien Murphy
+	email = damienomurchu@gmail.com
+[init]
+	defaultBranch = main
+[commit]
+  template = ~/.gitmessage
+[gpg]
+	program = gpg2

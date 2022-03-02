@@ -1,0 +1,265 @@
+#!/bin/bash
+
+function grep-kubernetes-projects() {
+  kubectl get ns | grep $1
+}
+
+function find-alias() {
+  alias | grep $1  
+}
+
+function conventional-commit() {
+  type=$1
+  scope=$3
+  change=$2
+  if [ -z $scope ]; then
+    git commit -m "$type: $change"
+  else
+    git commit -m "$type($scope): $change"
+  fi
+}
+
+function git-stash-save() {
+  args=($@)
+  change="${args[@]:0}"
+  git stash save "$change"
+}
+
+
+# searches command history
+# 0 args returns all history
+# 1+ args greps for a string from those args
+function h() {
+  history | grep "$*"
+}
+
+function clikan-work() {
+  echo "clikan_data: /home/dm/.clikan_work.dat" > $HOME/.clikan.yaml
+  echo "Switching to Work Kanban"
+  clikan show
+}
+
+function clikan-personal() {
+  echo "clikan_data: /home/dm/.clikan_personal.dat" > $HOME/.clikan.yaml
+  echo "Switching to Personal Kanban"
+  clikan show
+}
+
+function note() {
+  DATE=$(date '+%b %d, %a')
+  TAG=$1
+  TEXT=$2
+  if [ ! -f ~/.terminal-notes ]; then
+    mkdir ~/.notes 2>&1 1>/dev/null
+    echo "$DATE: [$TAG] $TEXT" > ~/.terminal-notes
+  else
+    echo "$DATE: [$TAG] $TEXT" >> ~/.terminal-notes
+  fi
+}
+
+function todo-entry() {
+  FILE="$HOME/.todo"
+  DATE=$(date '+%b_%d')
+  ENTRY="$DATE: $@"
+  
+  if [ -f $FILE ]; then
+    # new entry should be at start of todo file
+    { echo $ENTRY; cat $FILE } > ~/.tmp-file
+    mv ~/.tmp-file $FILE -f
+  else
+    echo $ENTRY > $FILE
+  fi
+
+  echo "Todo added: $ENTRY:"
+}
+
+function todo-search() {
+  grep "$*" $HOME/.todo
+}
+
+function todo-today() {
+  grep "$(date '+%b_%d')" $HOME/.todo
+}
+
+function todo-edit() {
+  $EDITOR $HOME/.todo
+}
+
+function secret-entry() {
+  FILE="$HOME/.secrets/work"
+  ENTRY="$@"
+  
+  if [ -f $FILE ]; then
+    # new entry should be at start of journal file
+    { echo $ENTRY; cat $FILE } > ~/.tmp-file
+    mv ~/.tmp-file $FILE -f
+  else
+    echo $ENTRY > $FILE
+  fi
+
+  echo "Secret added ($FILE):"
+  echo "\t$ENTRY"
+}
+
+function secret-search() {
+  grep -i "$*" $HOME/.secrets/work
+}
+
+function secret-edit() {
+  $EDITOR $HOME/.secrets/work
+}
+
+function journal-entry() {
+  FILE="$HOME/Documents/Journal"
+  DATE=$(date '+%b %d, %a')
+  ENTRY="$DATE: $@"
+  
+  if [ -f $FILE ]; then
+    # new entry should be at start of journal file
+    { echo $ENTRY; cat $FILE } > ~/.tmp-file
+    mv ~/.tmp-file $FILE -f
+  else
+    echo $ENTRY > $FILE
+  fi
+
+  echo "Journal entry added ($FILE):"
+  echo "\t$ENTRY"
+}
+
+function journal-search() {
+  grep "$*" ~/Documents/Journal
+}
+
+function journal-edit() {
+  $EDITOR ~/Documents/Journal
+}
+
+# check if work diary file exists
+# if so echo date & entry to file
+# if not create & echo same to file
+# make diary entries
+alias jj="diary-add"
+alias jk="diary-view"
+function diary-add() {
+  DATE=$(date '+%b %d, %a')
+  ENTRY=$2
+  if [ ! -f ~/.diaries/$1.txt ]; then
+    # check if user wants to create new diary
+    echo -n "Create the diary: $1? (y/n) "
+    read CREATE_DIARY
+    case $CREATE_DIARY in
+      [yY]* ) mkdir ~/.diaries 2>&1 1>/dev/null
+              echo "$DATE: $ENTRY" > ~/.diaries/$1.txt;;
+    esac
+  else
+    echo "$DATE: $ENTRY" >> ~/.diaries/$1.txt 
+    echo entry added to to ~/.diaries/$1-journal.txt
+  fi
+}
+
+# check diary entries
+function diary-view() {
+  if [ -f ~/.diaries/$1.txt ]; then
+    cat ~/.diaries/$1.txt
+  else 
+    echo "No such diary!"
+  fi
+}
+
+# stash git changes as wip
+function wip () {
+  if [ -n "$1" ]; then
+    git stash save '"$*"'
+  elif [ -z "$1" ]; then 
+    local date=$(date +%a" @ "%H:%M" ("%b" "%d", "%Y")")
+    git stash save "WIP $date"
+  fi
+}
+
+# clone gh repo into repos dir
+# clone-gh-repo <clone-url> | <gh-username> <gh-repo-name>
+function clone-gh-repo () {
+  if [ -z $1 ]; then 
+    echo "No repo specified"
+    return 1
+  fi 
+  REPOS_DIR=$HOME/repos
+  REPO_URL=$1
+  if [ $2 ]; then
+    REPO_URL=git@github.com:$1/$2.git
+  fi
+  git clone $REPO_URL $REPOS_DIR
+  echo $REPO_URL cloned into $REPOS_DIR
+}
+
+acp() {
+  git add . && git commit -aqm "$1" && git pull -q --no-progress && git push -q;
+}
+
+# searches directory for all files that contain string
+# ds() {
+#   if [ $# -gt 1 ]; then
+#     grep -r "$1" "$2"
+#   elif [ $# -gt 0 ]; then
+#     grep -r "$1" "./"
+#   else
+#     echo 'No string/ pattern specified'
+#   fi
+# } 
+
+# simlink a project directory to workspace directory
+# workspace dir will be created if it doesn't exist
+# current directory will be simlinked if a project path isn't specified
+# syntax: add-to-workspace <workspace-name> [project-path]... 
+function add-to-workspace() {
+  ARGS=("$@")
+  WORKSPACE_NAME=$ARGS[1]
+  WORKSPACE_DIR="$HOME/workspaces/$WORKSPACE_NAME"
+  PROJECT_PATHS=("${ARGS[@]:1}")
+
+  # create workspace dir if needed
+  if [ ! -d "$WORKSPACE_DIR" ]; then
+    echo "workspace doesn't exist - creating workspace: $WORKSPACE_DIR"
+    mkdir -p $WORKSPACE_DIR
+  fi
+
+  # TODO: check if project paths are valid paths
+  # use $PWD if no project paths specified
+  if [ ${#PROJECT_PATHS[@]} -eq 0 ]; then
+    PROJECT_PATHS=($PWD)
+  fi
+
+  # link all projects
+  for PROJECT_PATH in "${PROJECT_PATHS[@]}"
+  do
+    echo "$PROJECT_PATH added to $WORKSPACE_DIR"
+    ln -s $PROJECT_PATH $WORKSPACE_DIR
+  done
+
+  # change to workspace
+  echo "switching to workspace: $WORKSPACE_DIR"
+  cd $WORKSPACE_DIR
+}
+
+# login to ocm with token
+function ocm-login {
+  ocm login --url=https://api.stage.openshift.com/ --token=$1
+}
+
+# remove finalizers from a k8s namespace
+function finalize() {
+  NAMESPACE=$1
+  kubectl proxy &
+  kubectl get namespace $NAMESPACE -o json |jq '.spec = {"finalizers":[]}' > tmp.json
+  curl -k -H "Content-Type: application/json" -X PUT --data-binary @tmp.json 127.0.0.1:8001/api/v1/namespaces/$NAMESPACE/finalize
+  rm tmp.json
+}
+
+function ocm-cluster-credentials() {
+  ocm get /api/clusters_mgmt/v1/clusters/$(ocm get clusters | jq '.items[] | select(.name | startswith("damurphy")).id' -r)/credentials | jq -r .admin.password
+}
+
+# osd-kubeadmin-login damurphy.c00j 
+function osd-kubeadmin-login() {
+  echo "https://oauth-openshift.apps.$1.s1.devshift.org/login/kube:admin?then=%2Foauth%2Fauthorize%3Fclient_id%3Dconsole%26idp%3DOpenShift_SRE%26redirect_uri%3Dhttps%253A%252F%252Fconsole-openshift-console.apps.damurphy.c00j.s1.devshift.org%252Fauth%252Fcallback%26response_type%3Dcode%26scope%3Duser%253Afull%26state%3D0ea0c5f5"
+}

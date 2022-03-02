@@ -1,0 +1,5 @@
+[module/pulseaudio-microphone]
+type = custom/script
+exec = ~/.config/polybar/scripts/pulseaudio-microphone.sh
+tail = true
+click-left = ~/polybar-scripts/pulseaudio-microphone.sh --toggle &

@@ -1,0 +1,3 @@
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>

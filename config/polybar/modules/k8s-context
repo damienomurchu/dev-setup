@@ -1,0 +1,4 @@
+[module/k8s-context]
+type = custom/script
+exec = ~/.config/polybar/scripts/k8s-context.sh
+interval = 5

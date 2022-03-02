@@ -1,0 +1,23 @@
+;==========================================================
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;         https://github.com/polybar/polybar
+;
+;==========================================================
+
+;import settings
+include-file = /home/dm/.config/polybar/settings/default
+include-file = /home/dm/.config/polybar/settings/global-wm
+
+;import colors
+include-file = /home/dm/.config/polybar/colors/default
+
+;import bar(s)
+include-file = /home/dm/.config/polybar/bars/primary
+

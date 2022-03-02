@@ -1,0 +1,5 @@
+[module/vpn-expressvpn]
+type = custom/script
+exec = ~/.config/polybar/scripts/vpn-expressvpn-status.sh
+click-left = ~/.config/polybar/scripts/vpn-expressvpn-status.sh --toggle &
+interval = 10

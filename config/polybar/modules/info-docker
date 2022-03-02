@@ -1,0 +1,4 @@
+[module/info-docker]
+type = custom/script
+exec = ~/.config/polybar/scripts/info-docker.sh
+interval = 60

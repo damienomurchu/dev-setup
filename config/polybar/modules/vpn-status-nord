@@ -1,0 +1,4 @@
+[module/vpn-status-nord]
+type = custom/script
+exec = ~/.config/polybar/scripts/vpn-status-nord.sh
+interval = 5

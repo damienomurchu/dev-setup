@@ -1,0 +1,14 @@
+[module/date]
+type = internal/date
+interval = 5
+
+;date = "%d %b"
+date = "%b-%d"
+time = "%H:%M"
+
+;format-prefix = 
+format-prefix-foreground = ${colors.foreground}
+format-underline = #0a6cf5
+
+label = " %time%  ::  %date%"
+;label = "%time%"

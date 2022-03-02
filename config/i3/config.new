@@ -1,0 +1,283 @@
+#################
+# user-specific #
+#################
+
+# set modifier key
+set $mod Mod4
+
+set $laptop_screen eDP-1
+set $external_screens  
+
+set $app_terminal tilix
+set $app_notes typora
+set $app_browser brave-browser
+set $app_browser_private "brave-browser --incognito"
+set $app_text_editor codium
+
+
+##############
+# workspaces #
+##############
+
+# default workspace layout
+workspace_layout tabbed
+
+# workspace toggle
+workspace_auto_back_and_forth yes
+
+set $ws1 "1:"
+set $ws2 "2:"
+set $ws3 "3:"
+set $ws4 "4:"
+set $ws5 "5:"	
+set $ws6 "6:"	
+set $ws7 "7:" 	
+set $ws8 "8:"
+set $ws9 "9:"
+set $ws0 "0:"
+
+# set default monitors for workspaces
+workspace $ws1 output $external_screens $laptop_screen 
+workspace $ws2 output $external_screens $laptop_screen
+workspace $ws3 output $external_screens $laptop_screen
+workspace $ws4 output $external_screens $laptop_screen
+workspace $ws5 output $external_screens $laptop_screen
+workspace $ws6 output $external_screens $laptop_screen
+workspace $ws7 output $external_screens $laptop_screen
+workspace $ws8 output $external_screens $laptop_screen
+workspace $ws9 output $external_screens $laptop_screen
+workspace $ws0 output $external_screens $laptop_screen
+
+# 
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws0
+
+# workspace toggle
+bindsym $Mod1+$mod+Left workspace prev
+bindsym $Mod1+$mod+Right workspace next
+
+# move window to a specific workspace
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws0; workspace $ws0
+
+
+##############
+# scratchpad #
+##############
+
+# Move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Move currently focused scratchpad out of scratchpad
+bindsym Control+Shift+minus floating toggle
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
+#for_window [class="Typora"] move window to scratchpad
+
+# scratchpad apps
+bindsym $mod+Escape [class="$terminal"] scratchpad show; resize set 1600 900; move position center
+
+# change this to IDE to cycle between all IDEs in scratchpad
+#bindsym $mod+c [class="Codium"] scratchpad show
+
+# change this to editors to get whatever editor I have in scratch
+#bindsym $mod+x [class="Joplin"] scratchpad show; resize set 1600 900; move position center
+bindsym Control+Escape [class="Typora"] scratchpad show
+
+# scratchpad apps
+bindsym $mod+t [class="Tilix"] scratchpad show
+#bindsym $mod+t [class="Terminator"] scratchpad show
+
+bindsym $mod+x [class="Brave"] scratchpad show
+
+# change this to IDE to cycle between all IDEs in scratchpad
+bindsym $mod+c [class="Codium"] scratchpad show
+
+# change this to editors to get whatever editor I have in scratch
+#bindsym $mod+x [class="Joplin"] scratchpad show
+#bindsym $mod+e [class="Typora"] scratchpad show
+bindsym $mod+e [class="obsidian"] scratchpad show
+
+
+###########
+# windows #
+###########
+
+# Compton/ picom 
+#exec_always --no-startup-id picom --config $HOME/.config/picom/config
+
+# set title to be center
+title_align center
+
+# Win + Mouse to move windows
+floating_modifier $mod
+
+# stop following focus
+focus_follows_mouse no
+
+# vim-like marks
+show_marks yes
+
+# switch to prev/ next window in same workspace
+bindsym $mod+Tab focus right
+bindsym $mod+Left focus left
+bindsym $mod+Right focus right
+bindsym $mod+Up focus up
+bindsym $mod+Down focus down
+
+# swap container with containers next to it
+bindsym $mod+Shift+Left mark --add "swapee"; focus left; swap container with mark "swapee"; focus left; unmark "swapee"
+bindsym $mod+Shift+Right mark --add "swapee"; focus right; swap container with mark "swapee"; focus right; unmark "swapee"
+bindsym $mod+Shift+Up mark --add "swapee"; focus up; swap container with mark "swapee"; focus up; unmark "swapee"
+bindsym $mod+Shift+Down mark --add "swapee"; focus down; swap container with mark "swapee"; focus down; unmark "swapee"
+
+set $cmd_mark_window "i3-input -F 'mark %s' -l 1 -P 'Mark: '"
+set $cmd_goto_marked_window "i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '"
+
+# read 1 character and mark the current window with this character
+bindsym Control+$mod+g exec $cmd_mark_window
+
+# read 1 character and go to the window with the character
+bindsym $mod+g exec $cmd_goto_marked_window
+
+# resize windows
+bindsym Control+$mod+Left resize shrink width 5 px or 5 ppt
+bindsym Control+$mod+Right resize grow width 5 px or 5 ppt
+bindsym Control+$mod+Up resize grow height 5 px or 5 ppt
+bindsym Control+$mod+Down resize shrink height 5 px or 5 ppt
+
+# i3/ windows
+bindsym $mod+h splith
+bindsym $mod+v splitv
+bindsym $mod+y layout toggle tabbed splith
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Control+minus floating toggle
+bindsym $mod+Mod1+Left move left 5 ppt
+bindsym $mod+Mod1+Right move right 5 ppt
+bindsym $mod+Mod1+Up move up 5 ppt 
+bindsym $mod+Mod1+Down move down 5 ppt
+bindsym $mod+q kill
+
+# center single window on uwd monitor
+bindsym $mod+s floating enable; resize set 60ppt 90ppt; move position center
+bindsym $mod+Shift+s floating enable; resize set 75ppt 90ppt; move position center
+#bindsym $mod+Shift+s move position mouse
+
+client.focused #00b0ef #00b0ef #141414 #ff7066
+client.focused_inactive #141414 #141414 #00b0ef #472b2a
+client.unfocused #141414 #141414 #7d7d7d #141414
+client.urgent #ff7066 #ff7066 #141414 #ff7066
+
+
+################
+# applications #
+################
+
+set $cmd_rofi_menu "rofi -combi-modi window#drun -font 'DejaVu 11.5' -show combi"
+set $cmd_rofi_wifi $HOME/.config/rofi-wifi-menu/rofi-wifi-menu.sh
+
+# applications
+bindsym $mod+d exec --no-startup-id $command_rofi_menu
+bindsym $mod+Space exec --no-startup-id $command_rofi_menu
+bindsym $mod+w exec --no-startup-id $cmd_rofi_wifi
+bindsym $mod+Return exec --no-startup-id $terminal
+
+###############
+# screenshots #
+###############
+
+# screenshots
+set $cmd_screenshot_to_file "maim -s $HOME/Pictures/screenshots/$(date '+%Y-%m-%d_%H%M%S.png')"
+
+bindsym Control+Mod1+4 exec --no-startup-id $cmd_screenshot_to_file
+bindsym Print exec --no-startup-id $cmd_screenshot_to_file
+
+
+#############
+# i3 config #
+#############
+
+# i3 settings
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exit
+bindsym $mod+F9 exec --no-startup-id $editor /home/dm/.config/i3/config
+
+
+###########
+# polybar #
+###########
+
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+bindsym $mod+p exec polybar-msg cmd toggle
+
+#########
+# audio #
+#########
+
+# audio controls
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym $mod+period exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym $mod+comma exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+bindsym $mod+m exec --no-startup-id pactl set-sink-mute
+
+
+#########
+# power #
+#########
+
+# power controls
+# TODO use blurred background for lock screen
+bindsym Control+Mod1+l exec --no-startup-id i3lock -c 000000
+#bindsym Control+Mod1+l exec --no-startup-id i3lock -i /home/dm/Pictures/wallpapers/neon-sunset.png
+bindsym Control+Mod1+k exec --no-startup-id $HOME/.config/i3/matrixlock.py
+bindsym Control+Mod1+h exec --no-startup-id systemctl hibernate
+bindsym Control+Mod1+s exec --no-startup-id systemctl suspend
+bindsym Control+Mod1+p exec --no-startup-id systemctl poweroff
+bindsym Control+Mod1+r exec --no-startup-id systemctl reboot
+
+
+##########
+# screen #
+##########
+
+set $cmd_laptop_screen "xrandr --output $laptop_screen --primary --mode 1600x900 --pos 0x0 --rotate normal"
+
+exec --no-startup-id $cmd_laptop_screen
+
+# redshift
+#exec_always --no-startup-id redshift -l 53.3244021:-6.5258779
+
+# laptop eDP1 brightness
+bindsym $mod+F5 exec --no-startup-id ~/.config/i3/scripts/brightness.sh - $laptop_screen 0.05
+bindsym $mod+F6 exec --no-startup-id ~/.config/i3/scripts/brightness.sh + $laptop_screen 0.05
+
+# wallpaper
+exec_always --no-startup-id feh --bg-scale /home/dm/Pictures/wallpapers-21x9/tron.jpg
+
+############
+# keyboard #
+############
+
+# Remap Caps Lock as additional Control
+#exec_always --no-startup-id setxkbmap -option ctrl:nocaps
+
+# remap caps-lock as an additional super key
+exec_always --no-startup-id "sleep 1; setxkbmap -option caps:super"

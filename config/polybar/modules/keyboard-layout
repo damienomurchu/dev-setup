@@ -1,0 +1,4 @@
+[module/keyboard-layout]
+type = custom/script
+exec = ~/.config/polybar/scripts/keyboard-layout.sh
+interval = 5
