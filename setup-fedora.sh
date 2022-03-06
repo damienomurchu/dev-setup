@@ -104,8 +104,9 @@ function setup-vscodium() {
 function setup-brave() {
   dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
   rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-  dnf install -y brave-browser
-  # add bitwarden
+  sudo dnf install -y brave-browser
+  cp $PWD/config/brave/extensions/* \
+    $HOME/.config/BraveSoftware/Brave-Browser/Default/Extensions
   echo "Brave-browser installed and configured"
 }
 
