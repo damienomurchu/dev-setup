@@ -43,7 +43,7 @@ function install-base-packages() {
     jq gh fzf ripgrep tldr \
     transmission \
   )
-  sudo dnf update    
+  sudo dnf update -y 
   sudo dnf install -y $base_packages
   echo "Base packages installed: $base_packages"
 }
