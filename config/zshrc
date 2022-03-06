@@ -105,7 +105,6 @@ function setup-shell() {
   init-shell-aliases
   init-shell-functions
   init-shell-env
-  init-secrets
   setup-tools
 }
 
