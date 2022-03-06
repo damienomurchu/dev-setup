@@ -87,6 +87,3 @@ function setup-brave() {
 }
 
 
-function setup-fedora() {
-
-}
