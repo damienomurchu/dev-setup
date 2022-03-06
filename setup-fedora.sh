@@ -86,8 +86,6 @@ function setup-brave() {
     # add bitwarden
 }
 
-function 
-
 
 function setup-fedora() {
 
