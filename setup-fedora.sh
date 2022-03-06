@@ -6,6 +6,7 @@ function get-input() {
     read -p "Enter hostname for machine: " machine_hostname
     read -p "Enter email for git and ssh keys: " git_ssh_email
     read -p "Enter name for git commits: " gh_name
+    read -p "Enter GitHub username to upload ssh key: " gh_username
     read -p "Enter a GitHub PAT to upload ssh key: " gh_pat
 }
 
@@ -24,7 +25,7 @@ function setup-ssh() {
     # add new key to github
     export public_ssh_key=$(cat $HOME/.ssh/id_$machine_hostname.pub)
     JSON_POST_BODY=$(printf '{"title": "%s", "key": "%s"}' "$machine_hostname" "$public_ssh_key")
-    curl -s -d "$JSON_POST_BODY" "https://api.github.com/user/keys?access_token=$gh_pat"
+    curl -u "$gh_username:$gh_pat" -s -d "$JSON_POST_BODY" "https://api.github.com/user/keys"
     echo "public key added to github: $HOME/.ssh/id_$machine_hostname"
 }
 
