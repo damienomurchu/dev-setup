@@ -95,15 +95,15 @@ function setup-vim() {
 function setup-vscodium() {
   rpmkeys --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
   printf "[gitlab.com_paulcarroty_vscodium_repo]\nname=download.vscodium.com\nbaseurl=https://download.vscodium.com/rpms/\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg\nmetadata_expire=1h" | sudo tee -a /etc/yum.repos.d/vscodium.repo
-  sudo dnf install codium
+  sudo dnf install codium -y
   ln -sf $PWD/config/vscode/settings.json $HOME/.config/VSCodium/User/settings.json
   ln -sf $PWD/config/vscode/keybindings.json $HOME/.config/VSCodium/User/keybindings.json
   echo "VSCodium installed and configured"
 }
 
 function setup-brave() {
-  dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
-  rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+  sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
+  sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
   sudo dnf install -y brave-browser
   cp $PWD/config/brave/extensions/* \
     $HOME/.config/BraveSoftware/Brave-Browser/Default/Extensions
