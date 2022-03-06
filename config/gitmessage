@@ -1,6 +1,22 @@
-#fix(): 
-#feat(): 
-#docs():
+#✨: #feature
+#🩹: #bug 
+#✅: #tests 
+#📝: #docs
+#🧽: #refactor
+#🤖: #automation 
+#🧪: #wip
+#🗃️: #data 
+#🧑‍💻: #UI/UX 
+#🔒️: #security 
+#🔑: #secrets
+#🚀: #deployment
+#💥: #breaking changes 
+#🔗: #dependencies
+#🔀: #merge 
+#⏪️: #revert 
+#🙈: #gitignore
+#🎉: #new project 
+
  
 # [optional body]
 
