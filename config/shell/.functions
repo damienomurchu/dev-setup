@@ -241,11 +241,6 @@ function add-to-workspace() {
   cd $WORKSPACE_DIR
 }
 
-# login to ocm with token
-function ocm-login {
-  ocm login --url=https://api.stage.openshift.com/ --token=$1
-}
-
 # remove finalizers from a k8s namespace
 function finalize() {
   NAMESPACE=$1
@@ -253,13 +248,4 @@ function finalize() {
   kubectl get namespace $NAMESPACE -o json |jq '.spec = {"finalizers":[]}' > tmp.json
   curl -k -H "Content-Type: application/json" -X PUT --data-binary @tmp.json 127.0.0.1:8001/api/v1/namespaces/$NAMESPACE/finalize
   rm tmp.json
-}
-
-function ocm-cluster-credentials() {
-  ocm get /api/clusters_mgmt/v1/clusters/$(ocm get clusters | jq '.items[] | select(.name | startswith("damurphy")).id' -r)/credentials | jq -r .admin.password
-}
-
-# osd-kubeadmin-login damurphy.c00j 
-function osd-kubeadmin-login() {
-  echo "https://oauth-openshift.apps.$1.s1.devshift.org/login/kube:admin?then=%2Foauth%2Fauthorize%3Fclient_id%3Dconsole%26idp%3DOpenShift_SRE%26redirect_uri%3Dhttps%253A%252F%252Fconsole-openshift-console.apps.damurphy.c00j.s1.devshift.org%252Fauth%252Fcallback%26response_type%3Dcode%26scope%3Duser%253Afull%26state%3D0ea0c5f5"
 }

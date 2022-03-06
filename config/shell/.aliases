@@ -52,8 +52,8 @@ function aliases-system() {
 }
 
 function aliases-apps-general() {
-  # appsalias g="git"
-  #alias code="codium"
+  #alias g="git"
+  alias code="codium"
   alias t="tmux"
   alias tf="terraform"
   alias r="ranger"
