@@ -41,7 +41,7 @@ function install-base-packages() {
     python3 python-pip \
     emacs tmux \
     jq gh fzf ripgrep tldr \
-    transmissioni \
+    transmission \
   )
   sudo dnf update    
   sudo dnf install -y $base_packages
@@ -58,7 +58,7 @@ function setup-git() {
 }
 
 function setup-zsh() {
-  sudo dnf install -y zsh
+  sudo dnf install -y zsh util-linux-user
   chsh $(which zsh) #should be done under regular user, not root
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
