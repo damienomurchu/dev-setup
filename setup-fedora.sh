@@ -59,7 +59,7 @@ function setup-git() {
 
 function setup-zsh() {
   sudo dnf install -y zsh util-linux-user
-  chsh $(which zsh) #should be done under regular user, not root
+  chsh -s $(which zsh)
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
     ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
