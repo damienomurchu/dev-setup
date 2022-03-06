@@ -1,28 +1,22 @@
 #!/bin/bash
 
 function configure-zsh() {
-  # oh-my-zsh options
-  autoload -U promptinit # initialize the prompt system promptinit for additional themes
-  export EDITOR=/usr/bin/vim
-  export ZSH="$HOME/.oh-my-zsh"
-  # ZSH_THEME="bira"
-  # autocompletion for commands
-  autoload -U +X bashcompinit && bashcompinit
-  autoload -Uz compinit && compinit
-  complete -o nospace -C /usr/local/bin/terraform terraform
-  complete -C '/usr/bin/aws_completer' aws
+  # Lines configured by zsh-newuser-install
+  HISTFILE=~/.histfile
+  HISTSIZE=10000
+  SAVEHIST=100000
+  setopt notify
+  unsetopt beep
+  bindkey -v
+  # End of lines configured by zsh-newuser-install
+  # The following lines were added by compinstall
+  zstyle :compinstall filename '/home/dm/.zshrc'
 
-  POWERLEVEL9K_MODE="nerdfont-complete"
-  HYPHEN_INSENSITIVE="true"
-  DISABLE_AUTO_UPDATE="true"
-  HIST_STAMPS="yyyy-mm-dd" # Changes the history time-date stamp
-  ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=232'
-  plugins=(
-    zsh-autosuggestions
-    history-substring-search
-    zsh-syntax-highlighting
-  )
-  source $ZSH/oh-my-zsh.sh
+  autoload -Uz compinit
+  compinit
+  # End of lines added by compinstall
+  source $HOME/.config/shell/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  source $HOME/.config/shell/zsh-autosuggestions/zsh-autosuggestions.zsh
 }
 
 function configure-theme() {
@@ -71,16 +65,12 @@ function init-shell-env() {
   export GO111MODULE=on
   export PATH=$PATH:$HOME/.local/bin
   export PATH=$PATH:$HOME/Library/Python/3.8/bin
-}
-
-function init-secrets() {
-  [ -f ~/.config/shell/secrets ] && source ~/.config/shell/secrets
+  export PATH="$HOME/.poetry/bin:$PATH"
 }
 
 function setup-tools() {
   # autocompletion for kubectl
   [ -x "$(command -v kubectl)" ] && source <(kubectl completion zsh)
-
 
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
   [ -f /usr/share/fzf/shell/key-bindings.zsh ] && source /usr/share/fzf/shell/key-bindings.zsh
@@ -120,6 +110,3 @@ function setup-shell() {
 }
 
 setup-shell
-
-export PATH="$HOME/.poetry/bin:$PATH"
-eval "$(_DEV_CLI_COMPLETE=source_zsh dev-cli 2>/dev/null)"

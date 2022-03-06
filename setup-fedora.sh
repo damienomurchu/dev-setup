@@ -60,14 +60,14 @@ function setup-git() {
 function setup-zsh() {
   sudo dnf install -y zsh util-linux-user
   chsh -s $(which zsh)
-  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
-    ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    $HOME/.config/shell/zsh-syntax-highlighting
   git clone https://github.com/zsh-users/zsh-autosuggestions \
-    ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    $HOME/.config/shell/zsh-autosuggestions
   # simlink zsh dotfiles
   [[ ! -d $HOME/.config/shell ]] || mkdir -p $HOME/.config/shell
-  ln -sf $PWD/config/shell $HOME/.config/shell
+  ln -sf $PWD/config/shell/aliases $HOME/.config/shell/aliases
+  ln -sf $PWD/config/shell/functions $HOME/.config/shell/functions
   [[ ! -f $HOME/.zshrc ]] || ln -sf $PWD/config/zshrc $HOME/.zshrc 
   echo "zsh and associated packages installed and configured."
 }
