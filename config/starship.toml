@@ -1,7 +1,5 @@
 add_newline = true
-
-[aws]
-disabled = true
+continuation_prompt = "     "
 
 [directory]
 truncation_length = 8
@@ -9,7 +7,81 @@ truncation_symbol = "…/"
 truncate_to_repo = false
 
 [git_branch]
-symbol = "🌱 "
+symbol = " "
+always_show_remote = true
 
-[container]
-disabled=false
+[git_commit]
+tag_symbol = " 🔖 "
+tag_disabled = false
+
+[git_status]
+format = '($all_status$ahead_behind($style) )'
+#format = '(\[$all_status$ahead_behind\]($style) )'
+conflicted	= "❌"
+ahead	= "🔼"
+behind	= "🔽"
+diverged	= "🔀"
+up_to_date	= ""
+untracked	= "✨"
+stashed	= "🧪"
+modified	= "📝"
+staged	= "🚁"
+renamed	= "🦋"
+deleted	= "🔥"
+
+[aws]
+symbol = "⛅ "
+
+[character]
+success_symbol = "🐧"
+error_symbol = "👀"
+
+[cmd_duration]
+min_time = "5_000"
+#show_notifications = true
+#min_time_to_notify = "45_000"
+
+[git_metrics]
+disabled = false
+format = '([+$added]($added_style) )([-$deleted]($deleted_style) )'
+
+[hostname]
+ssh_only = true
+
+[kubernetes]
+symbol = "🔱"
+disabled = false
+
+[python]
+symbol = "🪱"
+python_binary = "python3"
+
+[sudo]
+disabled = false
+symbol = "🧙‍♀️"
+
+[terraform]
+disabled = false
+symbol = "💠"
+
+
+############
+# disabled #
+############
+
+#[jobs]
+#symbol = "👷"
+
+
+#####################
+# not supported yet #
+#####################
+
+#[localip]
+#disabled = false
+#ssh_only = true
+
+#[container]
+#symbol = "📦"
+
+

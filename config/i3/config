@@ -46,10 +46,10 @@ bindsym $mod+F6 exec --no-startup-id ~/.config/i3/scripts/brightness.sh + eDP-1 
 #exec_always --no-startup-id redshift -l 53.3244021:-6.5258779
 
 # Remap Caps Lock as additional Control
-#exec_always --no-startup-id setxkbmap -option ctrl:nocaps
+exec_always --no-startup-id "sleep 1; setxkbmap -option ctrl:nocaps"
 
 # remap caps-lock as an additional super key
-exec_always --no-startup-id "sleep 1; setxkbmap -option caps:super"
+# exec_always --no-startup-id "sleep 1; setxkbmap -option caps:super"
 
 # power controls
 # TODO use blurred background for lock screen
@@ -88,7 +88,7 @@ exec_always --no-startup-id feh --bg-fill $HOME/Pictures/wallpaper/1920x1080-1.j
 ###############################################################################
 
 # set default applications
-set $terminal tilix
+set $terminal gnome-terminal
 set $notes typora
 set $browser brave-browser
 set $incognito "brave-browser --incognito"
@@ -121,7 +121,7 @@ bindsym $mod+minus scratchpad show
 
 # scratchpad apps
 #bindsym Control+Escape [class="chromium"] scratchpad show
-bindsym $mod+Escape [class="Tilix"] scratchpad show
+bindsym $mod+Escape [class="Gnome-terminal"] scratchpad show
 bindsym Mod1+Escape [class="obsidian"] scratchpad show 
 
 

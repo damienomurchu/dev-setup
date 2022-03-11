@@ -52,7 +52,9 @@ function aliases-system() {
 }
 
 function aliases-apps-general() {
-  #alias g="git"
+  alias g="git"
+  alias m="micro"
+  alias z="zellij"
   alias code="codium"
   alias t="tmux"
   alias tf="terraform"

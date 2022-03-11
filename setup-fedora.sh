@@ -73,8 +73,7 @@ function setup-zsh() {
 }
 
 function setup-i3() {
-  export i3_packages=(i3-gaps rofi polybar picom maim fontawesome-fonts starship playerctl xclip feh arandr tilix)
-  sudo dnf install -y $i3_packages
+  sudo dnf install -y i3-gaps rofi polybar picom maim fontawesome-fonts starship playerctl xclip feh arandr tilix
   git clone https://github.com/zbaylin/rofi-wifi-menu.git \
     $HOME/.config/rofi-wifi-menu
   [[ ! -d $HOME/.config/i3 ]] || mkdir -p $HOME/.config/i3
@@ -82,7 +81,7 @@ function setup-i3() {
   [[ ! -d $HOME/.config/polybar ]] || mkdir -p $HOME/.config/polybar
   ln -sf $PWD/config/polybar $HOME/.config/polybar
   ln -sf $PWD/config/starship.toml $HOME/.config/starship.toml
-  echo "i3 packages ($i3_packages) installed and configured."
+  echo "i3 and all required packages installed and configured."
 }
 
 function setup-vim() {
@@ -96,8 +95,8 @@ function setup-vscodium() {
   rpmkeys --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
   printf "[gitlab.com_paulcarroty_vscodium_repo]\nname=download.vscodium.com\nbaseurl=https://download.vscodium.com/rpms/\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg\nmetadata_expire=1h" | sudo tee -a /etc/yum.repos.d/vscodium.repo
   sudo dnf install codium -y
-  ln -sf $PWD/config/vscode/settings.json $HOME/.config/VSCodium/User/settings.json
-  ln -sf $PWD/config/vscode/keybindings.json $HOME/.config/VSCodium/User/keybindings.json
+#  ln -sf $PWD/config/vscode/settings.json $HOME/.config/VSCodium/User/settings.json
+#  ln -sf $PWD/config/vscode/keybindings.json $HOME/.config/VSCodium/User/keybindings.json
   echo "VSCodium installed and configured"
 }
 
@@ -105,8 +104,8 @@ function setup-brave() {
   sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/x86_64/
   sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
   sudo dnf install -y brave-browser
-  cp $PWD/config/brave/extensions/* \
-    $HOME/.config/BraveSoftware/Brave-Browser/Default/Extensions
+#  cp $PWD/config/brave/extensions/* \
+#    $HOME/.config/BraveSoftware/Brave-Browser/Default/Extensions
   echo "Brave-browser installed and configured"
 }
 
@@ -124,4 +123,4 @@ function setup-fedora() {
   setup-brave
 }
 
-setup-fedora
+#setup-fedora
