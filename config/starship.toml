@@ -58,7 +58,7 @@ python_binary = "python3"
 
 [sudo]
 disabled = false
-symbol = "🧙‍♀️"
+#symbol = "🧙‍♀️"
 
 [terraform]
 disabled = false
