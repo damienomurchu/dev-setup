@@ -11,7 +11,7 @@
     "when": "terminal.active"
   },
   {
-    "key": "alt+k",
+    "key": "alt+up",
     "command": "editor.action.moveLinesUpAction",
     "when": "editorTextFocus && !editorReadonly"
   },
@@ -21,7 +21,7 @@
     "when": "editorTextFocus && !editorReadonly"
   },
   {
-    "key": "alt+j",
+    "key": "alt+down",
     "command": "editor.action.moveLinesDownAction",
     "when": "editorTextFocus && !editorReadonly"
   },

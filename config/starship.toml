@@ -1,6 +1,77 @@
 add_newline = true
 continuation_prompt = "     "
 
+format = """
+$container\
+$username\
+$hostname\
+$localip\
+$shlvl\
+$singularity\
+$kubernetes\
+$directory\
+$vcsh\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+$docker_context\
+$package\
+$cmake\
+$cobol\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$helm\
+$java\
+$julia\
+$kotlin\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$swift\
+$terraform\
+$vlang\
+$vagrant\
+$zig\
+$nix_shell\
+$conda\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$env_var\
+$crystal\
+$custom\
+$sudo\
+$cmd_duration\
+$jobs\
+$battery\
+$time\
+$status\
+$shell\
+$line_break\
+$character\
+"""
+
 [directory]
 truncation_length = 8
 truncation_symbol = "…/"
@@ -16,7 +87,6 @@ tag_disabled = false
 
 [git_status]
 format = '($all_status$ahead_behind($style) )'
-#format = '(\[$all_status$ahead_behind\]($style) )'
 conflicted	= "❌"
 ahead	= "🔼"
 behind	= "🔽"
@@ -58,30 +128,18 @@ python_binary = "python3"
 
 [sudo]
 disabled = false
-#symbol = "🧙‍♀️"
 
 [terraform]
 disabled = false
 symbol = "💠"
 
+[jobs]
+symbol = "👷"
 
-############
-# disabled #
-############
-
-#[jobs]
-#symbol = "👷"
-
-
-#####################
-# not supported yet #
-#####################
+[container]
+symbol = "📦"
+format = "$symbol "
 
 #[localip]
 #disabled = false
 #ssh_only = true
-
-#[container]
-#symbol = "📦"
-
-
