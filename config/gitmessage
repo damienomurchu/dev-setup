@@ -1,23 +1,22 @@
-#✨: #feature
-#🩹: #bug 
-#✅: #tests 
-#📝: #docs
-#🧽: #refactor
-#🤖: #automation 
-#🧪: #wip
-#🗃️: #data 
-#🧑‍💻: #UI/UX 
-#🔒️: #security 
-#🔑: #secrets
-#🚀: #deployment
-#💥: #breaking changes 
-#🔗: #dependencies
-#🔀: #merge 
-#⏪️: #revert 
-#🙈: #gitignore
-#🎉: #new project 
+#User-affecting AND API-affecting:                 
+#  💥:breaking-change   🎉:new-api          ✨:api-feature     
+#User-affecting NOT API-affecting:
+#  🩹:bug-fix           🧑:ux-improvement   🧽:cleanup-code
+#NOT User-affecting NOT API-affecting:
+#  ✅:updated-tests     🤖:automation       🔒️:security
 
- 
+#💥
+#🎉
+#✨
+#🩹
+#🧑
+#🧽
+#✅
+#🤖
+#🔒️
+
+
+
 # [optional body]
 
 
