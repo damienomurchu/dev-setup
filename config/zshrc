@@ -1,29 +1,36 @@
 #!/bin/bash
 
 function configure-zsh() {
-  # Lines configured by zsh-newuser-install
+  # oh-my-zsh options
   HISTFILE=~/.histfile
   HISTSIZE=10000
   SAVEHIST=100000
-  setopt notify
-  unsetopt beep
-  bindkey -v
-  # End of lines configured by zsh-newuser-install
-  # The following lines were added by compinstall
-  zstyle :compinstall filename '/home/dm/.zshrc'
-
-  autoload -Uz compinit
-  compinit
-
-  source $HOME/.oh-my-zsh/oh-my-zsh.sh
-  ZSH_THEME="agnoster"
-
+  autoload -U promptinit # initialize the prompt system promptinit for additional themes
   # Preferred editor for local and remote sessions
   if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='vim'
   else
     export EDITOR='vim'
   fi
+  export ZSH="$HOME/.oh-my-zsh"
+  # ZSH_THEME="bira"
+  # autocompletion for commands
+  autoload -U +X bashcompinit && bashcompinit
+  autoload -Uz compinit && compinit
+  complete -o nospace -C /usr/local/bin/terraform terraform
+  complete -C '/usr/bin/aws_completer' aws
+
+  POWERLEVEL9K_MODE="nerdfont-complete"
+  HYPHEN_INSENSITIVE="true"
+  DISABLE_AUTO_UPDATE="true"
+  HIST_STAMPS="yyyy-mm-dd" # Changes the history time-date stamp
+  ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=232'
+  plugins=(
+    zsh-autosuggestions
+    history-substring-search
+    zsh-syntax-highlighting
+  )
+  source $ZSH/oh-my-zsh.sh
 }
 
 function configure-theme() {

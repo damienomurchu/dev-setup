@@ -70,5 +70,6 @@
   "vsicons.dontShowNewVersionMessage": true,
   "vetur.experimental.templateInterpolationService": true,
   "workbench.sideBar.location": "right",
-  "editor.multiCursorModifier": "ctrlCmd"
+  "editor.multiCursorModifier": "ctrlCmd",
+  "security.workspace.trust.untrustedFiles": "newWindow"
 }
