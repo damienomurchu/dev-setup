@@ -29,6 +29,7 @@ function configure-zsh() {
     zsh-autosuggestions
     history-substring-search
     zsh-syntax-highlighting
+    fzf
   )
   source $ZSH/oh-my-zsh.sh
 }
