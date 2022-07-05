@@ -2,6 +2,7 @@ add_newline = true
 continuation_prompt = "     "
 
 format = """
+$shell\
 $container\
 $username\
 $hostname\
@@ -67,7 +68,6 @@ $jobs\
 $battery\
 $time\
 $status\
-$shell\
 $line_break\
 $character\
 """
@@ -139,6 +139,12 @@ symbol = "👷"
 [container]
 symbol = "📦"
 format = "$symbol "
+
+[shell]
+disabled = false
+bash_indicator = "🔨"
+zsh_indicator = "ℤ"
+fish_indicator = "🐟"
 
 #[localip]
 #disabled = false

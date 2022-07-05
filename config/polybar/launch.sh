@@ -6,7 +6,10 @@ killall -q polybar
 # polybar-msg cmd quit
 
 # Launch bar(s)
-echo "---" | tee -a /tmp/polybar-bottom.log
-polybar primary 2>&1 | tee -a /tmp/polybar-bottom & disown
+if type "xrandr"; then
+  for monitor in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+    MONITOR=$monitor polybar primary 2>&1 | tee -a /tmp/polybar-$monitor & disown
+  done
+fi
 
 echo "Bars launched..."

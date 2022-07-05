@@ -20,6 +20,7 @@ include-file = /home/dm/.config/polybar/modules/xwindow
 
 [bar/primary]
 ;monitor = ${env:MONITOR:HDMI-1}
+monitor = ${env:MONITOR:}
 enable-ipc = true
 
 #width = 100%:-18

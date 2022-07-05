@@ -11,12 +11,12 @@ bindsym $mod+Space exec --no-startup-id "rofi -combi-modi window#drun -font 'Dej
 bindsym $mod+w exec --no-startup-id $HOME/.config/rofi-wifi-menu/rofi-wifi-menu.sh
 
 exec --no-startup-id "xrandr --output eDP-1 --primary --mode 1680x1050 --pos 0x0 --rotate normal"
-bindsym $mod+l exec --no-startup-id "xrandr --output DP-3-1 --off --output eDP-1 --primary --mode 1680x1050 --pos 0x0 --rotate normal"
-bindsym $mod+e exec --no-startup-id "xrandr --output eDP-1 --off --output DP-3-1 --primary --mode 3440x1440 --pos 0x0 --rotate normal"
+#bindsym $mod+l exec --no-startup-id "xrandr --output DP-3-1 --off --output eDP-1 --primary --mode 1680x1050 --pos 0x0 --rotate normal"
+#bindsym $mod+e exec --no-startup-id "xrandr --output eDP-1 --off --output DP-3-1 --primary --mode 3440x1440 --pos 0x0 --rotate normal"
 bindsym $mod+F7 exec --no-startup-id arandr
 
 # center single window on uwd monitor
-bindsym $mod+s floating enable; resize set 60ppt 90ppt; move position center
+#bindsym $mod+s floating enable; resize set 60ppt 90ppt; move position center
 bindsym $mod+Shift+s floating enable; resize set 75ppt 90ppt; move position center
 #bindsym $mod+Shift+s move position mouse
 
@@ -53,8 +53,8 @@ exec_always --no-startup-id "sleep 1; setxkbmap -option ctrl:nocaps"
 
 # power controls
 # TODO use blurred background for lock screen
-#bindsym Control+Mod1+l exec --no-startup-id i3lock -c 000000
-bindsym Control+Mod1+l exec --no-startup-id i3lock -i /var/home/dm/Pictures/wallpaper/1920x1080-3.png
+bindsym Control+Mod1+l exec --no-startup-id i3lock -c 000000
+#bindsym Control+Mod1+l exec --no-startup-id i3lock -i /var/home/dm/Pictures/wallpaper/1920x1080-3.png
 bindsym Control+$mod+q exec --no-startup-id i3lock -c 000000
 #bindsym Control+Mod1+l exec --no-startup-id i3lock -i /home/dm/Pictures/wallpapers/neon-sunset.png
 bindsym Control+Mod1+k exec --no-startup-id $HOME/.config/i3/matrixlock.py
@@ -80,8 +80,7 @@ exec_always --no-startup-id picom --config $HOME/.config/picom/config
 font pango:DejaVu Sans Mono 0
 
 # wallpaper
-#exec_always --no-startup-id feh --bg-fill $HOME/Pictures/wallpaper/3440x1440-1.png
-exec_always --no-startup-id feh --bg-fill $HOME/Pictures/wallpaper/1920x1080-1.jpg
+exec_always --no-startup-id feh --bg-fill $HOME/Pictures/wallpaper/coffee-cup-pencil.jpg
 
 ###############################################################################
 # Application settings                                                        #
@@ -97,10 +96,14 @@ set $editor codium
 set $screenshot "maim -s $HOME/Pictures/screenshots/$(date '+%Y-%m-%d_%H%M%S.png')"
 set $screenshot_clipboard "maim -s -u | xclip -selection clipboard -t image/png"
 # application keybindings
-bindsym $mod+Return exec --no-startup-id $terminal
+#bindsym $mod+Return exec --no-startup-id $terminal
+bindsym $mod+t exec --no-startup-id $terminal
 bindsym Control+$mod+e exec --no-startup-id emacs
 
 # screenshots
+bindsym $mod+s exec --no-startup-id $screenshot_clipboard
+bindsym --release $mod+c exec --no-startup-id xdotool key --clearmodifiers ctrl+c
+bindsym --release $mod+v exec --no-startup-id xdotool key --clearmodifiers ctrl+v
 bindsym Control+Mod1+3 exec --no-startup-id $screenshot_clipboard
 bindsym Control+Mod1+4 exec --no-startup-id $screenshot
 bindsym Print exec --no-startup-id $screenshot
@@ -117,7 +120,7 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym Control+Shift+minus floating toggle
 
 # Show the first scratchpad window
-bindsym $mod+minus scratchpad show
+#bindsym $mod+minus scratchpad show
 
 # scratchpad apps
 #bindsym Control+Escape [class="chromium"] scratchpad show
@@ -137,7 +140,7 @@ title_align center
 floating_modifier $mod
 
 #bindsym $mod+minus splith
-bindsym $mod+v splitv
+#bindsym $mod+v splitv
 
 # switch layouts
 workspace_layout tabbed
@@ -165,16 +168,16 @@ set $ws9 "9:"
 set $ws0 "0:"
 
 # set default monitors for workspaces
-workspace $ws1 output DP-2-1 HDMI-1 eDP-1 
-workspace $ws2 output DP-2-1 HDMI-1 eDP-1
-workspace $ws3 output DP-2-1 HDMI-1 eDP-1
-workspace $ws4 output DP-2-1 HDMI-1 eDP-1
-workspace $ws5 output DP-2-1 HDMI-1 eDP-1
-workspace $ws6 output DP-2-1 HDMI-1 eDP-1
-workspace $ws7 output DP-2-1 HDMI-1 eDP-1
-workspace $ws8 output DP-2-1 HDMI-1 eDP-1
-workspace $ws9 output DP-2-1 HDMI-1 eDP-1
-workspace $ws0 output DP-2-1 HDMI-1 eDP-1
+workspace $ws1 output DP-3-3 HDMI-1 eDP-1 
+workspace $ws2 output DP-3-3 HDMI-1 eDP-1
+workspace $ws3 output DP-3-3 HDMI-1 eDP-1
+workspace $ws4 output DP-3-3 HDMI-1 eDP-1
+workspace $ws5 output DP-3-3 HDMI-1 eDP-1
+workspace $ws6 output DP-3-3 HDMI-1 eDP-1
+workspace $ws7 output DP-3-3 HDMI-1 eDP-1
+workspace $ws8 output DP-3-3 HDMI-1 eDP-1
+workspace $ws9 output DP-3-3 HDMI-1 eDP-1
+workspace $ws0 output eDP-1 DP-3-3 HDMI-1
 
 # switch to workspace - using regular num keys
 bindsym $mod+1 workspace $ws1
@@ -202,8 +205,8 @@ bindcode $mod+90 workspace $ws0
 
 # switch to prev/ next window in same workspace
 bindsym $mod+Tab focus right
-bindsym $mod+Left focus left
-bindsym $mod+Right focus right
+bindsym $mod+Left workspace prev 
+bindsym $mod+Right workspace next
 
 # workspace toggle
 workspace_auto_back_and_forth yes
@@ -272,6 +275,7 @@ bindsym $mod+period exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5
 bindsym $mod+m exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 
 bindsym $mod+p exec --no-startup-id playerctl play-pause
+bindsym $mod+e exec --no-startup-id playerctl play-pause
 bindsym Mod1+p exec --no-startup-id playerctl play-pause
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 

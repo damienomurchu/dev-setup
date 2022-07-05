@@ -80,6 +80,21 @@ function aliases-apps-general() {
   # cli apps
   alias myip="curl http://ipecho.net/plain; echo"
   alias weather='curl http://wttr.in'
+
+  # cheat cli
+  alias c=cheat
+  alias ce="cheat -e"
+  alias cl="cheat -l"
+  alias cs="cheat -s"
+  alias ct="cheat -l -t"
+  function cn() {
+	cp ~/.config/cheat/cheatsheets/template ~/.cheatsheets/$1
+	vim ~/.cheatsheets/$1
+  }
+
+  # dnf aliases
+  alias ds="sudo dnf search"
+  alias di="sudo dnf install"
 }
 
 function aliases-functions() {
@@ -161,14 +176,6 @@ function aliases-dev() {
 function aliases-python() {
   alias venv="python3 -m venv .venv"
   alias venv-activate="source .venv/bin/activate"
-}
-
-function aliases-vpn() {
-  # vpn
-  alias vpn-fb='nmcli con up id "Farnborough (FAB)" --ask'
-  alias vpn-fb-down='nmcli con down id "Farnborough (FAB)"'
-  alias vpn-sp='nmcli con up id "São Paulo (GRU2)" --ask'
-  alias vpn-sp-down='nmcli con down id "São Paulo (GRU2)"'
 }
 
 function aliases-utilities() {
