@@ -2,7 +2,6 @@ add_newline = true
 continuation_prompt = "     "
 
 format = """
-$shell\
 $container\
 $username\
 $hostname\
@@ -69,7 +68,7 @@ $battery\
 $time\
 $status\
 $line_break\
-$character\
+$shell\
 """
 
 [directory]

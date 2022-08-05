@@ -28,7 +28,7 @@ unknown-as-up = true
 ; Available tags:
 ;   <label-connected> (default)
 ;   <ramp-signal>
-format-connected = <label-connected>
+format-connected = <ramp-signal> <label-connected>
 
 ; Available tags:
 ;   <label-disconnected> (default)
@@ -51,7 +51,7 @@ format-packetloss = <animation-packetloss> <label-connected>
 ;   %linkspeed% [wired]
 
 ; Default: %ifname% %local_ip%
-label-connected =  %essid%
+label-connected = %essid%
 label-connected-foreground = #eefafafa
 
 ; Default: (none)
@@ -69,3 +69,18 @@ animation-packetloss-1 = 📶
 animation-packetloss-1-foreground = #000000
 ; Framerate in milliseconds
 animation-packetloss-framerate = 500
+
+
+; Only applies if <ramp-signal> is used
+;ramp-signal-0 = ⮿
+;ramp-signal-1 = 𝍠
+;ramp-signal-2 = 𝍡
+;ramp-signal-3 = 𝍢
+;ramp-signal-4 = 𝍣
+;ramp-signal-5 = 𝍤
+ramp-signal-0 = ⮿
+ramp-signal-1 = ▁
+ramp-signal-2 = ▃
+ramp-signal-3 = ▄
+ramp-signal-4 = ▆
+ramp-signal-5 = █
